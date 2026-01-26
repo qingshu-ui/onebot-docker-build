@@ -1,0 +1,46 @@
+services:
+  napcat:
+    environment:
+      - ACCOUNT=2639125193
+      - TZ=Asia/Shanghai
+    ports:
+      - 6099:6099
+    container_name: napcat
+    restart: always
+    image: mlikiowa/napcat-docker:latest
+    volumes:
+      - ./napcat/config:/app/napcat/config
+      - ./QQ:/app/.config/QQ
+    networks:
+      - onebot_network
+    mac_address: 02:42:0a:ff:00:02
+  
+  douyin:
+    container_name: douyin
+    restart: always
+    image: dengwanlin/douyin_tiktok_download_api:latest
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - ./douyin/douyin_web/config.yaml:/app/crawlers/douyin/web/config.yaml
+      - ./douyin/tiktok_web/config.yaml:/app/crawlers/tiktok/web/config.yaml
+      - ./douyin/tiktok_app/config.yaml:/app/crawlers/tiktok/app/config.yaml
+    networks:
+      - onebot_network
+
+  onebot:
+    container_name: onebot
+    restart: always
+    image: dengwanlin/onebot:latest
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - ./logs:/root/bot/logs
+      - ./cache:/root/bot/cache
+      - ./config:/root/bot/config
+    networks:
+      - onebot_network
+
+networks:
+  onebot_network:
+    driver: bridge
