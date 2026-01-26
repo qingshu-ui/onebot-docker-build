@@ -40,6 +40,9 @@ services:
       - ./config:/root/bot/config
     networks:
       - onebot_network
+    depends_on:
+      - napcat
+      - douyin
 
 networks:
   onebot_network:
