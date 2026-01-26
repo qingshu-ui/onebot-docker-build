@@ -49,6 +49,6 @@ docker buildx build \
     --push .
 
 echo "🗑️ 删除临时文件"
-rm -rf $BUILD_CONTEXT
+rm -rf "$BUILD_CONTEXT"
 
 echo "✅ 所有任务已完成！"
