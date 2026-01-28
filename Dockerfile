@@ -11,6 +11,9 @@ RUN apt-get update && \
     libsqlite3-0 && \
     rm -rf /var/lib/apt/lists/*
 
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    echo "Asia/Shanghai" > /etc/timezone
+
 WORKDIR /root/bot
 
 COPY ./docker-build/${TARGETARCH}/app-*.kexe ./app.kexe
@@ -21,5 +24,5 @@ VOLUME /root/bot/logs
 VOLUME /root/bot/cache
 VOLUME /root/bot/config
 
-CMD ["./app.kexe"]
+ENTRYPOINT [ "./app.kexe" ]
 
