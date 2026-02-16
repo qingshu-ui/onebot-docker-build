@@ -44,6 +44,15 @@ services:
       - napcat
       - douyin
 
+  check-in:
+    container_name: check-in
+    restart: always
+    image: dengwanlin/check-in:latest
+    environment:
+      - TZ=Asia/Shanghai
+    networks:
+      - onebot_network
+
 networks:
   onebot_network:
     driver: bridge

@@ -21,8 +21,10 @@ mkdir -p "$BUILD_CONTEXT/arm64"
 mkdir -p "$BUILD_CONTEXT/amd64"
 
 echo "🚚 复制二进制文件..."
-cp $TARGET_ARM64 "$BUILD_CONTEXT/arm64"
-cp $TARGET_AMD64 "$BUILD_CONTEXT/amd64"
+# cp $TARGET_ARM64 "$BUILD_CONTEXT/arm64"
+# cp $TARGET_AMD64 "$BUILD_CONTEXT/amd64"
+docker cp dengwanlin-amd64:/root/OneBotMultiplatform/examples/app/build/bin/linuxArm64/releaseExecutable/app-1.0.0.kexe "$BUILD_CONTEXT/arm64"
+docker cp dengwanlin-amd64:/root/OneBotMultiplatform/examples/app/build/bin/linuxX64/releaseExecutable/app-1.0.0.kexe "$BUILD_CONTEXT/amd64"
 
 # 配置 buildx
 BUILDER_NAME="multi-builder"
